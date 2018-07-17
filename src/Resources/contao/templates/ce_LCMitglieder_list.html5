@@ -1,0 +1,50 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<div class="uk-card-body">
+    <?= $this->text; ?>
+    <ul class="uk-list uk-list-divider uk-column-1-2@s uk-column-1-3@m uk-column-divider">
+        <?php foreach ($this->members as $member): ?>
+            <?php if (!$member['verstorben_Jahr']): ?>
+                <li>
+                    <p><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?></p>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<!-- Verstorbene des LC -->
+<div class="uk-card-body uk-padding-remove-bottom">
+    <h4>Wir nahmen Abschied</h4>
+    <p>Die Erinnerung an unsere leider verstorbenen Mitglieder halten wir stets wach:</p>
+</div>
+<table class="uk-table uk-table-striped uk-table-small">
+    <thead>
+    <tr>
+        <th>Jahr</th>
+        <th>Mitglied</th>
+    </tr>
+    </thead>
+    <?php
+        $members = $this->members;
+        
+        usort($members, function ($a, $b) {
+            if ($a['verstorben_Jahr'] == $b['verstorben_Jahr']) {
+                return 0;
+            }
+            
+            return ($a['verstorben_Jahr'] < $b['verstorben_Jahr']) ? -1 : 1;
+        });
+        $members = json_decode(json_encode($members));
+        foreach ($this->members as $member): ?>
+            <?php if ($member['verstorben_Jahr']): ?>
+                <tr>
+                    <th scope="row" class="uk-table-middle"><?= $member['verstorben_Jahr']; ?></th>
+                    <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?></td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+</table>
+<?php $this->endblock(); ?>
