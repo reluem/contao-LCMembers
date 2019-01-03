@@ -1,12 +1,12 @@
 <?php
 // classes/LCMitglieder.php
-    namespace reluem\LC_Mitglieder\classes;
+    namespace Reluem;
     
     /**
      * Class LC_Mitglieder
      * @package LC_Mitglieder\classes
      */
-    class LC_Mitglieder extends \ContentElement
+    class LCMembers extends \ContentElement
     {
         
         protected $strTemplate = 'ce_LCMitglieder_list';
@@ -19,8 +19,8 @@
             $objMember = $this->Database->execute("SELECT * FROM tl_LC_Mitglieder where published = '1' ORDER BY name_last, name_first ");
             
             
-            if (($this->fe_template != $this->strTemplate) && ($this->fe_template != '')) {
-                $this->strTemplate = $this->fe_template;
+            if (($this->customTpl !== $this->strTemplate) && ($this->customTpl !== '')) {
+                $this->strTemplate = $this->customTpl;
                 $this->Template = new \FrontendTemplate($this->strTemplate);
             }
             

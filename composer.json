@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "reluem\\ContaoMembersBundle\\": "src/"
+            "Reluem\\ContaoLCMembersBundle\\": "src/"
         },
         "classmap": [
             "src/Resources/contao/"
@@ -21,6 +21,6 @@
         ]
     },
     "extra": {
-        "contao-manager-plugin": "reluem\\ContaoMembersBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "Reluem\\ContaoLCMembersBundle\\ContaoManager\\Plugin"
     }
 }
