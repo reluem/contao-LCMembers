@@ -5,9 +5,9 @@
     
     $GLOBALS['TL_DCA']['tl_content']['fields']['customTpl']['options'] = array
     (
-        'gallery',
-        'list',
-        'table',
+        'ce_LCMitglieder_gallery',
+        'ce_LCMitglieder_list',
+        'ce_LCMitglieder_table',
     );
     $GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval'] = array
     (

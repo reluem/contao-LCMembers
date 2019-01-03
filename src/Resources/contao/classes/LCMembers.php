@@ -20,7 +20,7 @@
             
             
             if (($this->customTpl !== $this->strTemplate) && ($this->customTpl !== '')) {
-                $this->strTemplate = 'ce_LCMitglieder_' . $this->customTpl;
+                $this->strTemplate = $this->customTpl;
                 $this->Template = new \FrontendTemplate($this->strTemplate);
             }
             
