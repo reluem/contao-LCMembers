@@ -1,69 +1,75 @@
-<?php $this->extend('block_searchable'); ?>
+<?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<div class="block-body">
-    <a href="#" class="uk-button-default"
-       uk-toggle="target: .partner ; animation: uk-animation-fade; queued: true; duration: 300"> {{fa::icon plus}}
+<a href="#" class="uk-button partner-toggle uk-button-default uk-margin-bottom"
+   uk-toggle="target: .partner ; animation: uk-animation-fade; queued: true; duration: 300">
+    <span uk-icon="plus"></span>
         Partner ein-/ausblenden</a>
     <script>
-        UIkit.util.on('.partner', 'show', function () {
+    window.onload = function () {
+        UIkit.util.on('.partner', 'hidden', function () {
             UIkit.update();
         });
+        UIkit.util.on('.partner', 'shown', function () {
+            UIkit.update();
+        });
+    };
     </script>
-    <br>
     <!-- Mitglieder Panel (internal) -->
-    <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-6@xl uk-grid-match uk-grid"
-         uk-grid>
+<div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-6@xl" uk-grid data-uk-grid-match>
         <?php foreach ($this->members as $member): ?>
             <?php if (!$member['verstorben_Jahr']): ?>
                 <div class="mitglied">
-                    <div class="uk-card uk-card-default">
-                        <div class="uk-card-media-top">
-                            <?php if ($member['image']): ?>
+                <div class="uk-tile uk-tile-default uk-padding-remove">
+                    <div class="uk-inline-clip uk-transition-toggle">
+                        <?php if ($member['image']) {
+                            $objFile = \FilesModel::findById($member['image']);
+                        } else {
+                            $objFile = \FilesModel::findByUuid('d9153d70-6de0-11e6-b8a2-90b11c41b0e5');
                                 
-                                <?php $objFile = \FilesModel::findById($member['image']);
+                        }
                                 if ($objFile !== null) {
                                     if (is_file(TL_ROOT . '/' . $objFile->path)) {
                                         $picture = \Picture::create($objFile->path,
                                             array(340, 453, 'center_top'))->getTemplateData();
-                                        $picture['alt'] = \StringUtil::specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
-                                        $picture['title'] = \StringUtil::specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
+                                    $picture['class'] .= 'uk-transition-scale-up uk-transition-opaque';
+                                    $picture['alt'] = specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
+                                    $picture['title'] = specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
                                         $this->insert('picture_default', $picture);
                                     }
                                 }
                                 
                                 ?>
-                            <?php else: ?>
-                                {{image::d9153d70-6de0-11e6-b8a2-90b11c41b0e5?width=340&height=453}}
-                            <?php endif; ?>
                         </div>
-                        <div class="uk-card-body uk-padding-small"><?php if ($member['titel']): ?><?= $member['titel']; ?><?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?>
+                    <div class="uk-padding-small">
+                        <?php if ($member['titel']): ?><?= $member['titel']; ?>&#32;<?php endif; ?>
+                        <?php echo "{$member['name_first']} {$member['name_last']}" ?>
                         </div>
                     </div>
                 </div>
                 <?php if ($member['name_last_partner']): ?>
                     <div class="partner" hidden>
-                        <div class="uk-card uk-card-default">
-                            <div class="uk-card-media-top">
-                                <?php if ($member['image_partner']): ?>
-                                    <?php
+                    <div class="uk-tile uk-tile-default uk-padding-remove">
+                        <div class="uk-inline-clip uk-transition-toggle">
+                            <?php if ($member['image_partner']) {
                                     $objFile = \FilesModel::findById($member['image_partner']);
+                            } else {
+                                $objFile = \FilesModel::findByUuid('d9153d70-6de0-11e6-b8a2-90b11c41b0e5');
+                            }
                                     if ($objFile !== null) {
                                         if (is_file(TL_ROOT . '/' . $objFile->path)) {
                                             $picture = \Picture::create($objFile->path,
                                                 array(340, 453, 'center_top'))->getTemplateData();
-                                            $picture['alt'] = StringUtil::specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
-                                            $picture['title'] = StringUtil::specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
+                                        $picture['class'] .= 'uk-transition-scale-up uk-transition-opaque';
+                                        $picture['alt'] = specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
+                                        $picture['title'] = specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
                                             $this->insert('picture_default', $picture);
                                         }
                                     }
                                     
                                     ?>
-                                <?php else: ?>
-                                    {{image::d9153d70-6de0-11e6-b8a2-90b11c41b0e5?width=340&height=453}}
-                                <?php endif; ?>
                             </div>
-                            <div class="uk-card-body uk-padding-small"><?php if ($member['titel_partner']): ?><?= $member['titel_partner']; ?><?php endif; ?><?php echo "{$member['name_first_partner']} {$member['name_last_partner']}" ?>
+                        <div class="uk-padding-small"><?php if ($member['titel_partner']): ?><?= $member['titel_partner']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first_partner']} {$member['name_last_partner']}" ?>
                             </div>
                         </div>
                     </div>
@@ -73,18 +79,21 @@
     </div>
 
     <!-- Verstorbene des LC -->
-    <h3>Wir nahmen Abschied</h3>
+<h4>Wir nahmen Abschied</h4>
     <p>Die Erinnerung an unsere leider verstorbenen Mitglieder halten wir stets wach:</p>
-    <table class='table table-striped table-condensed'>
+
+<table class="uk-table uk-table-striped uk-table-small">
         <thead>
-        <td>Jahr</td>
-        <td>Mitglied</td>
+    <tr>
+        <th>Jahr</th>
+        <th>Mitglied</th>
+    </tr>
         </thead>
         <?php
         $members = $this->members;
         
         usort($members, function ($a, $b) {
-            if ($a['verstorben_Jahr'] == $b['verstorben_Jahr']) {
+            if ($a['verstorben_Jahr'] === $b['verstorben_Jahr']) {
                 return 0;
             }
             
@@ -94,13 +103,12 @@
         foreach ($this->members as $member): ?>
             <?php if ($member['verstorben_Jahr']): ?>
                 <tr>
-                    <th scope="row"><?= $member['verstorben_Jahr']; ?></th>
-                    <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?><?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?></td>
+                    <th scope="row" class="uk-table-middle"><?= $member['verstorben_Jahr']; ?></th>
+                    <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;
+                        <?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?></td>
                 </tr>
             <?php endif; ?>
         <?php endforeach; ?>
     </table>
-
-</div>
 
 <?php $this->endblock(); ?>
