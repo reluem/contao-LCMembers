@@ -18,11 +18,9 @@
         {
             $objMember = $this->Database->execute("SELECT * FROM tl_LC_Mitglieder where published = '1' ORDER BY name_last, name_first ");
             
+            $this->strTemplate = 'ce_'.$this->arrData['type'];
+            $this->Template = new \FrontendTemplate($this->strTemplate);
             
-            if (($this->customTpl !== $this->strTemplate) && ($this->customTpl !== '')) {
-                $this->strTemplate = $this->customTpl;
-                $this->Template = new \FrontendTemplate($this->strTemplate);
-            }
             
             $this->Template->members = $objMember->fetchAllAssoc();
         }

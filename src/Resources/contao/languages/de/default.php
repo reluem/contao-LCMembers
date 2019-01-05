@@ -19,8 +19,16 @@
         'LIONS Module',
     );
     
-    $GLOBALS['TL_LANG']['CTE']['LC_Mitglieder'] = array(
-        'LIONS Mitglieder',
-        'Die LIONS Mitglieder als Liste, Gallery oder Tabelle ausgeben',
+    $GLOBALS['TL_LANG']['CTE']['LCMitglieder_list'] = array(
+        'Mitgliederliste',
+        'Die LIONS Mitglieder als Liste ausgeben',
+    );
+    $GLOBALS['TL_LANG']['CTE']['LCMitglieder_gallery'] = array(
+        'Mitglieder-Galerie',
+        'Die LIONS Mitglieder als Galerie ausgeben',
+    );
+    $GLOBALS['TL_LANG']['CTE']['LCMitglieder_table'] = array(
+        'Past-Präsidenten',
+        'Die Past-Präsidenten als Tabelle ausgeben',
     );
 
