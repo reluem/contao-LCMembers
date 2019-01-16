@@ -4,8 +4,8 @@
 <a href="#" class="uk-button partner-toggle uk-button-default uk-margin-bottom"
    uk-toggle="target: .partner ; animation: uk-animation-fade; queued: true; duration: 300">
     <span uk-icon="plus"></span>
-        Partner ein-/ausblenden</a>
-    <script>
+    Partner ein-/ausblenden</a>
+<script>
     window.onload = function () {
         UIkit.util.on('.partner', 'hidden', function () {
             UIkit.update();
@@ -14,82 +14,64 @@
             UIkit.update();
         });
     };
-    </script>
-    <!-- Mitglieder Panel (internal) -->
+</script>
+<!-- Mitglieder Panel (internal) -->
 <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-6@xl" uk-grid data-uk-grid-match>
-        <?php foreach ($this->members as $member): ?>
-            <?php if (!$member['verstorben_Jahr']): ?>
-                <div class="mitglied">
+    <?php foreach ($this->members as $member): ?>
+        <?php if (!$member['verstorben_Jahr']): ?>
+            <div class="mitglied">
                 <div class="uk-tile uk-tile-default uk-padding-remove">
                     <div class="uk-inline-clip uk-transition-toggle">
                         <?php if ($member['image']) {
-                            $objFile = \FilesModel::findById($member['image']);
+                            $objFile = StringUtil::binToUuid($member['image']);
                         } else {
-                            $objFile = \FilesModel::findByUuid('d9153d70-6de0-11e6-b8a2-90b11c41b0e5');
-                                
-                        }
-                                if ($objFile !== null) {
-                                    if (is_file(TL_ROOT . '/' . $objFile->path)) {
-                                        $picture = \Picture::create($objFile->path,
-                                            array(340, 453, 'center_top'))->getTemplateData();
-                                    $picture['class'] .= 'uk-transition-scale-up uk-transition-opaque';
-                                    $picture['alt'] = specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
-                                    $picture['title'] = specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}");
-                                        $this->insert('picture_default', $picture);
-                                    }
-                                }
-                                
-                                ?>
-                        </div>
+                            $objFile = 'd9153d70-6de0-11e6-b8a2-90b11c41b0e5';
+                        } ?>
+                        <?php if ($objFile !== null): ?>
+                            {{image::<?= ($objFile); ?>?width=340&height=453&class=uk-transition-scale-up uk-transition-opaque&alt=<?= specialchars("{$member['titel_lang']} {$member['name_first']} {$member['name_last']}"); ?>&mode=crop}}
+                        <?php endif; ?>
+                    </div>
                     <div class="uk-padding-small">
                         <?php if ($member['titel']): ?><?= $member['titel']; ?>&#32;<?php endif; ?>
                         <?php echo "{$member['name_first']} {$member['name_last']}" ?>
-                        </div>
                     </div>
                 </div>
-                <?php if ($member['name_last_partner']): ?>
-                    <div class="partner" hidden>
+            </div>
+            <?php if ($member['name_last_partner']): ?>
+                <div class="partner" hidden>
                     <div class="uk-tile uk-tile-default uk-padding-remove">
                         <div class="uk-inline-clip uk-transition-toggle">
                             <?php if ($member['image_partner']) {
-                                    $objFile = \FilesModel::findById($member['image_partner']);
+                                $objFile = StringUtil::binToUuid($member['image_partner']);
                             } else {
-                                $objFile = \FilesModel::findByUuid('d9153d70-6de0-11e6-b8a2-90b11c41b0e5');
-                            }
-                                    if ($objFile !== null) {
-                                        if (is_file(TL_ROOT . '/' . $objFile->path)) {
-                                            $picture = \Picture::create($objFile->path,
-                                                array(340, 453, 'center_top'))->getTemplateData();
-                                        $picture['class'] .= 'uk-transition-scale-up uk-transition-opaque';
-                                        $picture['alt'] = specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
-                                        $picture['title'] = specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}");
-                                            $this->insert('picture_default', $picture);
-                                        }
-                                    }
-                                    
-                                    ?>
-                            </div>
+                                $objFile = 'd9153d70-6de0-11e6-b8a2-90b11c41b0e5';
+                            } ?>
+                            <?php if ($objFile !== null): ?>
+                                {{image::<?= ($objFile); ?>?width=340&height=453&class=uk-transition-scale-up uk-transition-opaque&alt=<?= specialchars("{$member['titel_lang_partner']} {$member['name_first_partner']} {$member['name_last_partner']}"); ?>&mode=crop}}
+                            <?php endif; ?>
+
+                        </div>
                         <div class="uk-padding-small"><?php if ($member['titel_partner']): ?><?= $member['titel_partner']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first_partner']} {$member['name_last_partner']}" ?>
-                            </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                </div>
             <?php endif; ?>
-        <?php endforeach; ?>
-    </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
 
-    <!-- Verstorbene des LC -->
+<!-- Verstorbene des LC -->
 <h4>Wir nahmen Abschied</h4>
-    <p>Die Erinnerung an unsere leider verstorbenen Mitglieder halten wir stets wach:</p>
+<p>Die Erinnerung an unsere leider verstorbenen Mitglieder halten wir stets wach:</p>
 
 <table class="uk-table uk-table-striped uk-table-small">
-        <thead>
+    <thead>
     <tr>
         <th>Jahr</th>
         <th>Mitglied</th>
     </tr>
-        </thead>
-        <?php
+    </thead>
+    <?php
         $members = $this->members;
         
         usort($members, function ($a, $b) {
@@ -109,6 +91,6 @@
                 </tr>
             <?php endif; ?>
         <?php endforeach; ?>
-    </table>
+</table>
 
 <?php $this->endblock(); ?>
