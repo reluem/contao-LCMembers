@@ -1,26 +1,27 @@
 {
-    "name": "reluem/contao-LCMembers",
-    "type": "contao-bundle",
-    "authors": [
-        {
-            "name": "Lucas Rech",
-            "email": "reluem@icloud.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Reluem\\ContaoLCMembersBundle\\": "src/"
-        },
-        "classmap": [
-            "src/Resources/contao/"
-        ],
-        "exclude-from-classmap": [
-            "src/Resources/contao/config/",
-            "src/Resources/contao/dca/",
-            "src/Resources/contao/languages/"
-        ]
-    },
-    "extra": {
-        "contao-manager-plugin": "Reluem\\ContaoLCMembersBundle\\ContaoManager\\Plugin"
+  "name": "reluem/contao-lcmembers",
+  "description": "A contao bundle to manage club members",
+  "type": "contao-bundle",
+  "authors": [
+    {
+      "name": "Lucas Rech",
+      "email": "reluem@icloud.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Reluem\\ContaoLCMembersBundle\\": "src/"
+    },
+    "classmap": [
+      "src/Resources/contao/"
+    ],
+    "exclude-from-classmap": [
+      "src/Resources/contao/config/",
+      "src/Resources/contao/dca/",
+      "src/Resources/contao/languages/"
+    ]
+  },
+  "extra": {
+    "contao-manager-plugin": "Reluem\\ContaoLCMembersBundle\\ContaoManager\\Plugin"
+  }
 }
