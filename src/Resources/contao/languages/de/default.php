@@ -11,6 +11,14 @@
      * @copyright Lucas Rech 2018
      */
     
+    /**
+     * Back end modules
+     */
+    $GLOBALS['TL_LANG']['MOD']['LC_Mitglieder'] = array(
+        'LIONS Mitglieder',
+        'Die Mitglieder des LC Landshut-Wittelsbach',
+    );
+    
     
     /**
      * Front end Content elements
