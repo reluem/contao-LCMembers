@@ -118,7 +118,7 @@
         'palettes' => array
         (
 //        '__selector__' => array(''),
-            'default' => '{mitglied_legend}, name_first, name_last, titel, titel_lang, image, president, verstorben_Jahr; {partner_legend}, name_first_partner, name_last_partner, titel_partner, titel_lang_partner, image_partner;',
+            'default' => '{mitglied_legend}, name_first, name_last, titel, titel_lang, image, president, deceased, retired; {partner_legend}, name_first_partner, name_last_partner, titel_partner, titel_lang_partner, image_partner;',
         ),
         
         // Fields
@@ -147,6 +147,15 @@
                 'exclude' => true,
                 'filter' => true,
                 'inputType' => 'checkbox',
+                'sql' => "char(1) NOT NULL default ''",
+            ),
+            'retired' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_LC_Mitglieder']['retired'],
+                'exclude' => true,
+                'inputType' => 'checkbox',
+                'default' => 1,
+                'eval' => ['tl_class' => 'w50 clr'],
                 'sql' => "char(1) NOT NULL default ''",
             ),
             'name_last' => array
@@ -212,12 +221,12 @@
                 'sql' => "varchar(255) NOT NULL default ''",
             
             ),
-            'verstorben_Jahr' => array(
-                'label' => &$GLOBALS['TL_LANG']['tl_LC_Mitglieder']['verstorben_Jahr'],
+            'deceased' => array(
+                'label' => &$GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deceased'],
                 'exclude' => true,
                 'sorting' => false,
                 'inputType' => 'text',
-                'eval' => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
+                'eval' => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard clr'),
                 'sql' => "varchar(10) NOT NULL default ''",
             
             ),

@@ -17,7 +17,7 @@
             <?php if ($member['president']): ?>
                 <tr>
                     <th scope="row" class="uk-table-middle"><?= $member['president']; ?></th>
-                    <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?><?php if ($member['verstorben_Jahr']): ?> &dagger;<?php endif; ?></td>
+                    <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;<?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?><?php if ($member['deceased']): ?> &dagger;<?php endif; ?></td>
                 </tr>
             <?php endif; ?>
         <?php endforeach; ?>

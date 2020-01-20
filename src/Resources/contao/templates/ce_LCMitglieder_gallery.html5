@@ -18,7 +18,7 @@
 <!-- Mitglieder Panel (internal) -->
 <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-6@xl" uk-grid data-uk-grid-match>
     <?php foreach ($this->members as $member): ?>
-        <?php if (!$member['verstorben_Jahr']): ?>
+        <?php if (!$member['deceased'] && !$member['retired']): ?>
             <div class="mitglied">
                 <div class="uk-tile uk-tile-default uk-padding-remove">
                     <div class="uk-inline-clip uk-transition-toggle">
@@ -75,17 +75,17 @@
         $members = $this->members;
         
         usort($members, function ($a, $b) {
-            if ($a['verstorben_Jahr'] === $b['verstorben_Jahr']) {
+            if ($a['deceased'] === $b['deceased']) {
                 return 0;
             }
             
-            return ($a['verstorben_Jahr'] < $b['verstorben_Jahr']) ? -1 : 1;
+            return ($a['deceased'] < $b['deceased']) ? -1 : 1;
         });
         $members = json_decode(json_encode($members));
         foreach ($this->members as $member): ?>
-            <?php if ($member['verstorben_Jahr']): ?>
+            <?php if ($member['deceased']): ?>
                 <tr>
-                    <th scope="row" class="uk-table-middle"><?= $member['verstorben_Jahr']; ?></th>
+                    <th scope="row" class="uk-table-middle"><?= $member['deceased']; ?></th>
                     <td><?php if ($member['titel_lang']): ?><?= $member['titel_lang']; ?>&#32;
                         <?php endif; ?><?php echo "{$member['name_first']} {$member['name_last']}" ?></td>
                 </tr>
