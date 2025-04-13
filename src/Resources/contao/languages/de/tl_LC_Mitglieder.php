@@ -29,7 +29,7 @@
     );
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deceased'] = array(
         'Verstorben im Jahr',
-        'Das Todesjahr des verstorbenen Mitglieds. Nur befüllen, wenn verstorben! Mitglied wird dann gesondert ausgewiesen. (Format: 2016)',
+        'Todesjahr des verstorbenen Mitglieds. Nur befüllen, wenn verstorben! Mitglied wird dann gesondert ausgewiesen. (Format: 2016)',
     );
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['image_partner'] = array(
         'Profilbild des Partners',
@@ -45,6 +45,7 @@
     );
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['delete'][0] = 'Mitglied löschen';
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['delete'][1] = 'Mitglied ID %s löschen';
+    $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deleteConfirm'] = 'Soll das Mitglied ID %s wirklich gelöscht werden?';
     
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['show'][0] = 'Mitgliederdetails';
     $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['show'][1] = 'Details zum Mitglieds ID %s anzeigen';

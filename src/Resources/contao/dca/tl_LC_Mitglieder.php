@@ -83,7 +83,7 @@
                     'label' => &$GLOBALS['TL_LANG']['tl_LC_Mitglieder']['delete'],
                     'href' => 'act=delete',
                     'icon' => 'delete.gif',
-                    'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
+                    'attributes' => 'onclick="if(!confirm(\'' . (isset($GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deleteConfirm']) ? $GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deleteConfirm'] : 'Bist du sicher?') . '\'))return false;Backend.getScrollOffset()"',
                 ),
                 'show' => array
                 (
@@ -217,18 +217,17 @@
                 'exclude' => true,
                 'sorting' => false,
                 'inputType' => 'text',
-                'eval' => array('maxlength' => 255, 'tl_class' => 'w50'),
-                'sql' => "varchar(255) NOT NULL default ''",
+                'eval' => array('rgxp' => 'digit', 'maxlength' => 4, 'tl_class' => 'w50'),
+                'sql' => "varchar(4) NOT NULL default ''",
             
             ),
             'deceased' => array(
                 'label' => &$GLOBALS['TL_LANG']['tl_LC_Mitglieder']['deceased'],
                 'exclude' => true,
                 'sorting' => false,
-                'inputType' => 'text',
-                'eval' => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard clr'),
-                'sql' => "varchar(10) NOT NULL default ''",
-            
+               'inputType' => 'text',
+                'eval' => array('rgxp' => 'digit', 'maxlength' => 4, 'tl_class' => 'w50'),
+                'sql' => "varchar(4) NOT NULL default ''",
             ),
             
             'image_partner' => array(
