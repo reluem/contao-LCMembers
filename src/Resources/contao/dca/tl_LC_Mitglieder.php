@@ -217,8 +217,8 @@
                 'exclude' => true,
                 'sorting' => false,
                 'inputType' => 'text',
-                'eval' => array('rgxp' => 'digit', 'maxlength' => 4, 'tl_class' => 'w50'),
-                'sql' => "varchar(4) NOT NULL default ''",
+                'eval' => array('maxlength' => 255, 'tl_class' => 'w50'),
+                'sql' => "varchar(255) NOT NULL default ''",
             
             ),
             'deceased' => array(
