@@ -16,7 +16,7 @@
          */
         protected function compile()
         {
-            $objMember = $this->Database->execute("SELECT * FROM tl_LC_Mitglieder where published = '1' ORDER BY name_last, name_first ");
+            $objMember = $this->Database->prepare("SELECT * FROM tl_LC_Mitglieder WHERE published = ? ORDER BY name_last, name_first")->execute('1');
             
             $this->strTemplate = 'ce_'.$this->arrData['type'];
             $this->Template = new \FrontendTemplate($this->strTemplate);
