@@ -1,19 +1,33 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<a href="#" class="uk-button partner-toggle uk-button-default uk-margin-bottom"
-   uk-toggle="target: .partner ; animation: uk-animation-fade; queued: true; duration: 300">
-    <span uk-icon="plus"></span>
-    Partner ein-/ausblenden</a>
+<button type="button" class="uk-button partner-toggle uk-button-default uk-margin-bottom">
+    <span class="partner-icon-show" uk-icon="plus"></span>
+    <span class="partner-icon-hide" hidden uk-icon="minus"></span>
+    Partner ein-/ausblenden
+</button>
 <script>
-    window.onload = function () {
-        UIkit.util.on('.partner', 'hidden', function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleBtn = document.querySelector('.partner-toggle');
+        var iconShow = toggleBtn.querySelector('.partner-icon-show');
+        var iconHide = toggleBtn.querySelector('.partner-icon-hide');
+        var partners = document.querySelectorAll('.partner');
+        var isVisible = false;
+
+        toggleBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            isVisible = !isVisible;
+            iconShow.hidden = isVisible;
+            iconHide.hidden = !isVisible;
+            
+            partners.forEach(function (el) {
+                el.hidden = !isVisible;
+            });
+            
+            // Update grid layout after toggle
             UIkit.update();
         });
-        UIkit.util.on('.partner', 'shown', function () {
-            UIkit.update();
-        });
-    };
+    });
 </script>
 <!-- Mitglieder Panel (internal) -->
 <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-6@xl" uk-grid data-uk-grid-match>
